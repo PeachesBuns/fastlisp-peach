@@ -1,4 +1,4 @@
-(comment fastlisp sample code)
+(comment this contains the church encoding in fastlisp which has an inefficient implementation of integers)
 
 (comment names)
 
@@ -24,66 +24,52 @@
 (lambda or
 (lambda and
 
-
-
-(comment undefined function names)
-(lambda eval
+(comment church encoding)
+(lambda 0
 (lambda +
-(lambda -
+(lambda +1
 (lambda *
-(lambda /
 (lambda ^
-(lambda <
-(lambda >
-(lambda <=
-(lambda >=
+(lambda -1
+(lambda -
 
 
 
 
 (comment fastlisppython)
-
+ibis
 
 (comment main program)
-ibis
+
 
 
 (comment definitions)
 
-(comment fastlisppython definitions)
 
 
-(comment >=)
-) undefined
+(comment church encoding definitions)
 
-(comment <=)
-) undefined
-
-(comment >)
-) undefined
-
-(comment <) 
-) undefined
-
-(comment ^)
-) undefined
-
-(comment /)
-) undefined
-
-(comment *)
-) undefined
+(comment 0)
+) (lambda f (lambda x x))
 
 (comment -)
-) undefined
+) (lambda m (lambda (n (n -1) m)))
 
-(comment +)
-) undefined
+(comment -1)
+) (lambda n (lambda f (lambda x (n (lambda g (lambda h (h (g f))))(lambda u x)(lambda u u)))))
 
-(comment so basically eval with the current design of fastlisp is unable to be contextually aware of the variable names that we are defining because these veriable names only exist before com         pile time so if we are going to eval we have to do it with a new fastlisp program unless we use macros.)
-(comment eval)
-) (lambda new-fastlisp-program-in-a-string
-          undefined)
+(comment ^)
+) (lambda m (lambda n (n m)))
+
+(comment multiply)
+) (lambad m (lambda n (lambda f ( lambda x (m (n f) x)))))
+
+(comment plus)
+) (lambda m (lambda n (lambda f (m f (n f x)))))
+
+
+(comment end of church encoding definitions)
+) (lambda n (lambda f (lambda x (f (n f x)))))
 
 (comment and)
 ) (lambda x (lambda y (x y and)))

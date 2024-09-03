@@ -26,64 +26,69 @@
 
 
 
-(comment undefined function names)
-(lambda eval
+
+
+
+
+
+
+
+
+
+(comment church encoding)
 (lambda +
-(lambda -
+(lambda +1
 (lambda *
-(lambda /
 (lambda ^
-(lambda <
-(lambda >
-(lambda <=
-(lambda >=
-
-
-
-
-(comment fastlisppython)
-
+(lambda -1
+(lambda -
+(lambda 0
+(lambda =0
 
 (comment main program)
-ibis
-
+(+1 (+1 (+1 (+1 (+1 (+1 (+1 0)))))))
 
 (comment definitions)
 
-(comment fastlisppython definitions)
+(comment church encoding definitions)
+
+(comment iszero)
+) (lambda n (n (lambda x false) true))
+
+(comment zero)
+) (lambda f (lambda x x))
+
+(comment subtract)
+) (lambda m (lambda n (n -1 m)))
+
+(comment predecess)
+) (lambda n (lambda f (lambda x (n (lambda g (lambda h (h (g f))))(lambda u x)(lambda u u)))))
+
+(comment exponentiate)
+) (lambda m (lambda n (n m)))
+
+(comment multiply)
+) (lambda m (lambda n (lambda f (m (n f)))))
+
+(comment addone)
+) (lambda n (lambda f (lambda x (f (n f x)))))
+
+(comment add)
+) (lambda m (lambda n (lambda f (lambda x (m f (n f x))))))
 
 
-(comment >=)
-) undefined
 
-(comment <=)
-) undefined
 
-(comment >)
-) undefined
 
-(comment <) 
-) undefined
 
-(comment ^)
-) undefined
 
-(comment /)
-) undefined
 
-(comment *)
-) undefined
 
-(comment -)
-) undefined
 
-(comment +)
-) undefined
 
-(comment so basically eval with the current design of fastlisp is unable to be contextually aware of the variable names that we are defining because these veriable names only exist before com         pile time so if we are going to eval we have to do it with a new fastlisp program unless we use macros.)
-(comment eval)
-) (lambda new-fastlisp-program-in-a-string
-          undefined)
+
+
+(comment end of church encoding definitions)
 
 (comment and)
 ) (lambda x (lambda y (x y and)))
